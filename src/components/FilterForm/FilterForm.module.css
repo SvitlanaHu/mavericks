@@ -1,0 +1,37 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 343px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .wrapper {
+    gap: 32px;
+    width: 360px;
+  }
+}
+@media (min-width: 1440px) {
+  .wrapper {
+    width: 360px;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  height: 88;
+}
+.label {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+}
+.locatonInput {
+  height: 56px;
+  background-color: var(--inputs);
+  border: none;
+  border-radius: 10px;
+}

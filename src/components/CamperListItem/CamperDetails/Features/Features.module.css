@@ -1,0 +1,3 @@
+.featureName::first-letter{
+    text-transform: uppercase;
+}

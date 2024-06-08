@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 888px;
+  height: 358px;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px;
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  color: var(--main-text);
+}
+.content {
+  width: 526px;
+}
