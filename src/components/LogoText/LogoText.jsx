@@ -1,22 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useEffect, forwardRef } from "react";
 import style from "./LogoText.module.css";
 
-export const LogoText = () => {
-  const logoText = useRef(null);
+export const LogoText = forwardRef((props, ref) => {
 
   useEffect(() => {
     const tId = setTimeout(() => {
-      logoText.current.classList.add(style.moved);
+      if (ref.current) {
+        ref.current.classList.add(style.moved);
+      }
     }, 2500);
 
     return () => {
       clearTimeout(tId);
     };
-  }, []);
+  }, [ref]);
 
   return (
-    <h2 ref={logoText} className={style.logoText}>
-      RENTALof<span className={style.span}>CAMPER</span>
+    <h2 ref={ref} className={style.logoText}>
+      RENTAL<span className={style.spanOf}>of</span><span className={style.spanCamper}>CAMPER</span>
     </h2>
   );
-};
+});
+
+LogoText.displayName = "LogoText";
