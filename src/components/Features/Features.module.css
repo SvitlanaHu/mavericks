@@ -18,6 +18,12 @@
   background-color: var(--block-features);
   font-size: 16px;
   font-weight: 600;
+}
+
+.svg {
   fill: none;
   stroke: var(--main-text);
+}
+.svgFill {
+  fill: var(--main-text);
 }

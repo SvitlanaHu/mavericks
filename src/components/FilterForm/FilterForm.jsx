@@ -1,14 +1,17 @@
 import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
 import style from "./FilterForm.module.css";
 import icons from "../../images/sprite.svg";
+import { resetFilters, setFilters } from "../../Redux/camperSlice";
 
-export const FilterForm = () => {
+export const FilterForm = () => {  
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const form = Array.from(event.target.form.elements);
-
-    const location = form[0].value.length ? form[0].value : null;
+    const location = form[0].value.length ? form[0].value : undefined;
 
     const checkBoxValue = [];
     form.map((checkBox) => {
@@ -22,20 +25,38 @@ export const FilterForm = () => {
         radio.type === "radio" && radio.name === "form" && radio.checked
     ).value;
 
-    console.log(location);
-    console.log(checkBoxValue);
-    console.log(radioBoxValue);
+    dispatch(
+      setFilters({
+        location: location,
+        details: checkBoxValue,
+        camperType: radioBoxValue,
+      })
+    );
   };
 
   const handleChangeCheckBox = (event) => {
     event.currentTarget.classList.toggle(style.checked);
   };
 
-  const handleChangeRadio = (event) => {
+  function resetRadio() {
     document.getElementById("radio11").classList.remove(style.checked);
     document.getElementById("radio21").classList.remove(style.checked);
     document.getElementById("radio31").classList.remove(style.checked);
+  }
+
+  const handleChangeRadio = (event) => {
+    resetRadio();
     event.currentTarget.classList.add(style.checked);
+  };
+
+   const handleResetFilters = () => {
+    dispatch(resetFilters());
+    document.getElementById("locationInput").value = "";
+    const checkBox = document.getElementsByClassName(style.checked);
+    for (let i = checkBox.length - 1; i >= 0; i--) {
+      checkBox[i].classList.remove(style.checked);
+      }
+    resetRadio();
   };
 
   return (
@@ -61,7 +82,7 @@ export const FilterForm = () => {
           <ul>
             <li>
               <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
+                <svg className={style.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-AC`}></use>
                   </svg>
                 AC
@@ -75,6 +96,9 @@ export const FilterForm = () => {
             </li>
             <li>
               <label className={style.label}>
+                <svg className={style.iconFill} width="32" height="32">
+                    <use href={`${icons}#icon-bathroom`}></use>
+                  </svg>
                 Bathroom
                 <input
                   type="checkbox"
@@ -156,7 +180,7 @@ export const FilterForm = () => {
             </li>
             <li>
               <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
+                <svg className={style.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-toilet`}></use>
                   </svg>
                 Toilet
@@ -231,7 +255,7 @@ export const FilterForm = () => {
           <ul>
             <li>
               <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
+                <svg className={style.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-camper-alcove`}></use>
                   </svg>
                 Alcove
@@ -245,7 +269,7 @@ export const FilterForm = () => {
             </li>
             <li>
               <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
+                <svg className={style.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-camper-fully-Int`}></use>
                   </svg>
                 Fully Integrated
@@ -259,7 +283,7 @@ export const FilterForm = () => {
             </li>
             <li>
               <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
+                <svg className={style.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-camper-van`}></use>
                   </svg>
                 Van
@@ -274,7 +298,7 @@ export const FilterForm = () => {
           </ul>
         </div>
 
-        <button type="submit">Search</button>
+        <button className={style.btn} type="submit">Search</button>
       </form>
     </div>
   );

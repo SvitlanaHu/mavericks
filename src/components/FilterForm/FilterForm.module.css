@@ -70,12 +70,18 @@
   fill: none;
   stroke: var(--main-text);
 }
+.iconFill {
+  fill: var(--main-text);
+}
 
 .formGroup ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 8px;
+  margin: 24px 0 0 0;
+  padding: 24px 0 0 0;
+  border-top: 1px solid var(--border);
 }
 
 .formGroup .label {
@@ -118,4 +124,27 @@
 .formGroup input[type="checkbox"]:checked + svg + p,
 .formGroup input[type="radio"]:checked + p {
   border-color: var(--button);
+}
+
+.btn {
+  padding: 16px 32px;
+  gap: 10px;
+  border-radius: 200px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  width: 173px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  text-align: center;
+  color: white;
+  background-color: var(--button);
+  border: none;
+}
+
+.btn:hover,
+.btn:focus {
+  font-weight: 700;
 }

@@ -3,7 +3,6 @@
   width: 343px;
   margin: 0 auto;
   padding: 32px 16px;
-  background-color: var(--background);
 }
 @media (min-width: 768px) {
   .wrapper {

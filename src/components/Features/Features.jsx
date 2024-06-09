@@ -1,13 +1,13 @@
 import { nanoid } from "nanoid";
 import PropTypes from 'prop-types';
 import style from "./Features.module.css";
-import icons from "../../../../images/sprite.svg";
+import icons from "../../images/sprite.svg";
 
 export const Features = ({ camper }) => {
   return (
     <ul className={style.wrapper} >
       <li className={style.featureBox} key={nanoid()}>
-        <svg className={style.svg} width="20" height="20">
+        <svg className={style.svgFill} width="20" height="20">
           <use href={`${icons}#icon-Users`}></use>
         </svg>
         <p className={style.featureName}>{camper.adults} adults</p>
@@ -19,7 +19,7 @@ export const Features = ({ camper }) => {
         <p className={style.featureName}>{camper.transmission}</p>
       </li>
       <li className={style.featureBox} key={nanoid()}>
-        <svg className={style.svg} width="20" height="20">
+        <svg className={style.svgFill} width="20" height="20">
           <use href={`${icons}#icon-fuel`}></use>
         </svg>
         <p className={style.featureName}>{camper.engine}</p>
@@ -37,7 +37,7 @@ export const Features = ({ camper }) => {
         <p className={style.featureName}>{camper.details.beds} beds</p>
       </li>
       <li className={style.featureBox} key={nanoid()}>
-        <svg className={style.svg} width="20" height="20">
+        <svg className={style.svgFill} width="20" height="20">
           <use href={`${icons}#icon-AC`}></use>
         </svg>
         <p className={style.featureName}>AC</p>

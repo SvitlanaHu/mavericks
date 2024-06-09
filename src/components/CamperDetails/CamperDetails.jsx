@@ -1,8 +1,9 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import style from "./CamperDetails.module.css";
-import icons from "../../../images/sprite.svg";
-import { Features } from "./Features/Features";
-import DisplayNumber from '../../DisplayNumber/DisplayNumber';
+import icons from "../../images/sprite.svg";
+import { Features } from "../Features/Features";
+import DisplayNumber from '../DisplayNumber/DisplayNumber';
 
 export const CamperDetails = ({ camper }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -59,4 +60,24 @@ export const CamperDetails = ({ camper }) => {
       <Features camper={camper} />      
     </div>
   );
+};
+
+CamperDetails.propTypes = {
+  camper: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        reviewer_rating: PropTypes.number.isRequired,
+      })
+    ),
+    location: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    adults: PropTypes.number,
+    transmission: PropTypes.string,
+    engine: PropTypes.string,
+    details: PropTypes.shape({
+      beds: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
 };

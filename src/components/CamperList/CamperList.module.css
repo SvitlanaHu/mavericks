@@ -40,7 +40,7 @@
   padding: 16px 32px;
   gap: 10px;
   border-radius: 200px;
-  border: 1px 0px 0px 0px;
+  border: 2px solid var(--border);
   opacity: 0px;
 
   font-family: Inter;
@@ -50,4 +50,10 @@
   letter-spacing: -0.005em;
   text-align: center;
   color: var(--main);
+  background-color: var(--white);
+}
+
+.btn:hover,
+.btn:focus {
+  border-color: var(--button);
 }
