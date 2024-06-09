@@ -8,7 +8,7 @@ export const Features = ({ camper }) => {
     <ul className={style.wrapper} >
       <li className={style.featureBox} key={nanoid()}>
         <svg className={style.svgFill} width="20" height="20">
-          <use href={`${icons}#icon-Users`}></use>
+          <use href={`${icons}#icon-users`}></use>
         </svg>
         <p className={style.featureName}>{camper.adults} adults</p>
       </li>
@@ -26,7 +26,7 @@ export const Features = ({ camper }) => {
       </li>
       <li className={style.featureBox} key={nanoid()}>
         <svg className={style.svg} width="20" height="20">
-          <use href={`${icons}#icon-forkKnife`}></use>
+          <use href={`${icons}#icon-kitchen`}></use>
         </svg>
         <p className={style.featureName}>Kitchen</p>
       </li>
@@ -38,7 +38,7 @@ export const Features = ({ camper }) => {
       </li>
       <li className={style.featureBox} key={nanoid()}>
         <svg className={style.svgFill} width="20" height="20">
-          <use href={`${icons}#icon-AC`}></use>
+          <use href={`${icons}#icon-ac`}></use>
         </svg>
         <p className={style.featureName}>AC</p>
       </li>

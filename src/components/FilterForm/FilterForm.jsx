@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+
 import { useDispatch } from "react-redux";
 import style from "./FilterForm.module.css";
 import icons from "../../images/sprite.svg";
@@ -10,24 +10,14 @@ export const FilterForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const form = Array.from(event.target.form.elements);
-    const location = form[0].value.length ? form[0].value : undefined;
-
-    const checkBoxValue = [];
-    form.map((checkBox) => {
-      if (checkBox.name === "equipment" && checkBox.checked) {
-        checkBoxValue.push(checkBox.value);
-      }
-    });
-
-    const radioBoxValue = form.find(
-      (radio) =>
-        radio.type === "radio" && radio.name === "form" && radio.checked
-    ).value;
+    const form = new FormData(event.target.form);
+    const location = form.get("locationInput") || undefined;
+    const checkBoxValue = Array.from(form.getAll("equipment"));
+    const radioBoxValue = form.get("form");
 
     dispatch(
       setFilters({
-        location: location,
+        location,
         details: checkBoxValue,
         camperType: radioBoxValue,
       })
@@ -38,11 +28,11 @@ export const FilterForm = () => {
     event.currentTarget.classList.toggle(style.checked);
   };
 
-  function resetRadio() {
-    document.getElementById("radio11").classList.remove(style.checked);
-    document.getElementById("radio21").classList.remove(style.checked);
-    document.getElementById("radio31").classList.remove(style.checked);
-  }
+  const resetRadio = () => {
+    ["radio11", "radio21", "radio31"].forEach((id) => {
+      document.getElementById(id).classList.remove(style.checked);
+    });
+  };
 
   const handleChangeRadio = (event) => {
     resetRadio();
@@ -52,16 +42,18 @@ export const FilterForm = () => {
    const handleResetFilters = () => {
     dispatch(resetFilters());
     document.getElementById("locationInput").value = "";
-    const checkBox = document.getElementsByClassName(style.checked);
-    for (let i = checkBox.length - 1; i >= 0; i--) {
-      checkBox[i].classList.remove(style.checked);
-      }
+    document.querySelectorAll(`.${style.checked}`).forEach((element) => {
+      element.classList.remove(style.checked);
+    });
     resetRadio();
   };
 
+  const equipmentGroup1 = ["AC", "Bathroom", "Toilet"];
+  const equipmentGroup2 = ["Kitchen", "TV", "CD", "Radio", "Shower", "Water", "Freezer", "Conditioner", "Microwave"];
+
   return (
     <div className={style.wrapper}>
-      <form className={style.formContainer}>
+      <form className={style.formContainer} onSubmit={handleSubmit}>
         <div className={style.formlocalGroup}>
           <label className={style.label} htmlFor="locationInput">Location</label>
           <input
@@ -77,228 +69,88 @@ export const FilterForm = () => {
         </div>
         
         <div className={style.formGroup}>
-          <label htmlFor="">Filters</label>
+          <label>Filters</label>
           <h3 className={style.title}>Vehicle equipment</h3>
           <ul>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-AC`}></use>
+            {equipmentGroup1.map((item, index) => (
+              <li key={`group1-checkbox-${item}`}>
+                <label className={style.label}>
+                  <svg className={style.iconFill} width="32" height="32">
+                    <use href={`${icons}#icon-${item.toLowerCase()}`}></use>
                   </svg>
-                AC
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="airConditioner"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-bathroom`}></use>
+                  {item}
+                  <input
+                    type="checkbox"
+                    name="equipment"
+                    value={item.toLowerCase()}
+                    id={`checkbox1-${index}`}
+                    onChange={handleChangeCheckBox}
+                  />
+                </label>
+              </li>
+            ))}
+            {equipmentGroup2.map((item, index) => (
+              <li key={`group2-checkbox-${item}`}>
+                <label className={style.label}>
+                  <svg className={style.icon} width="32" height="32">
+                    <use href={`${icons}#icon-${item.toLowerCase()}`}></use>
                   </svg>
-                Bathroom
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="bathroom"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-forkKnife`}></use>
-                  </svg>
-                Kitchen
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="kitchen"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-tv`}></use>
-                  </svg>
-                TV
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="TV"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-cd`}></use>
-                  </svg>
-                CD
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="CD"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-radio`}></use>
-                  </svg>
-                Radio
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="radio"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-shower`}></use>
-                  </svg>
-                Shower
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="shower"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-toilet`}></use>
-                  </svg>
-                Toilet
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="toilet"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-water`}></use>
-                  </svg>
-                Water
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="toilet"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-freezer`}></use>
-                  </svg>
-                Freezer
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="freezer"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-conditioner`}></use>
-                  </svg>
-                Conditioner
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="freezer"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.icon} width="32" height="32">
-                    <use href={`${icons}#icon-microwave`}></use>
-                  </svg>
-                Microwave
-                <input
-                  type="checkbox"
-                  name="equipment"
-                  value="microwave"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
+                  {item}
+                  <input
+                    type="checkbox"
+                    name="equipment"
+                    value={item.toLowerCase()}
+                    id={`checkbox2-${index}`}
+                    onChange={handleChangeCheckBox}
+                  />
+                </label>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={style.formGroup}>
-            <h3>Vihicle type</h3>
+            <h3>Vehicle type</h3>
           <ul>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-camper-alcove`}></use>
-                  </svg>
-                Alcove
+            {[
+              { id: "radio11", label: "Alcove", value: "Alcove", icon: "camper-alcove" },
+              { id: "radio21", label: "Fully Integrated", value: "fullyIntegrated", icon: "camper-fully-int" },
+              { id: "radio31", label: "Van", value: "panelTruck", icon: "camper-van" },
+            ].map((radio, index) => (
+              <li key={`radio-${radio.id}`}>
+                <label className={style.label}>
+                  <div
+                    className={style.radioBox}
+                    onClick={handleChangeRadio}
+                    id={radio.id}
+                  >
+                    <svg className={style.iconFill} width="32" height="32">
+                      <use href={`${icons}#icon-${radio.icon}`}></use>
+                    </svg>
+                    {radio.label}
+                  </div>
+                </label>
                 <input
-                  type="checkbox"
+                  type="radio"
                   name="form"
-                  value="Alcove"
-                  id={nanoid()}
+                  value={radio.value}
+                  id={`radio-input-${index}`}
                 />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-camper-fully-Int`}></use>
-                  </svg>
-                Fully Integrated
-                <input
-                  type="checkbox"
-                  name="form"
-                  value="fullyIntegrated"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
-            <li>
-              <label className={style.label}>
-                <svg className={style.iconFill} width="32" height="32">
-                    <use href={`${icons}#icon-camper-van`}></use>
-                  </svg>
-                Van
-                <input
-                  type="checkbox"
-                  name="form"
-                  value="panelTruck"
-                  id={nanoid()}
-                />
-              </label>
-            </li>
+              </li>
+            ))}
           </ul>
         </div>
 
-        <button className={style.btn} type="submit">Search</button>
+        <div className={style.btnContainer}>
+          <button
+            className={style.btn}
+            type="submit"
+          >
+            Search
+          </button>
+          <p className={style.resetFilters} onClick={handleResetFilters}>
+            Reset filters?
+          </p>
+        </div>
       </form>
     </div>
   );

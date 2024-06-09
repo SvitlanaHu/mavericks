@@ -33,7 +33,7 @@ export const CamperDetails = ({ camper }) => {
         <div className={style.ratingContainer}>
           <div className={style.ratingBox}>
             <svg className={style.svgRating} width="16" height="16">
-              <use href={`${icons}#icon-RatingStar`}></use>
+              <use href={`${icons}#icon-ratingstar`}></use>
             </svg>
             <p>
               {camper.reviews && camper.reviews.length > 0 ? (
