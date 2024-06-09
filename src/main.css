@@ -18,6 +18,7 @@
 
   background-color: var(--white);
   font-family: Inter;
+  color: var(--main-text);
 }
 
 [data-theme="dark"] {
