@@ -15,10 +15,19 @@
   justify-content: space-between;
   font-size: 14px;
 }
+h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .priceBox {
   display: flex;
   flex-direction: row;
   gap: 12px;
+}
+.price {
+  display: flex;
+  flex-direction: row;
 }
 .svgHeart {
   fill: var(--white);
@@ -41,11 +50,16 @@
 .ratingBox {
   display: flex;
   flex-direction: row;
+  font-weight: 500;
   gap: 4px;
   align-items: center;
 }
 .svgRating {
   fill: var(--rating);
+}
+.svgMap {
+  fill: none;
+  stroke: var(--main-text);
 }
 .description {
   line-height: normal;

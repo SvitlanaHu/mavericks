@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import style from "./CamperDetails.module.css";
 import icons from "../../../images/sprite.svg";
 import { Features } from "./Features/Features";
+import DisplayNumber from '../../DisplayNumber/DisplayNumber';
 
 export const CamperDetails = ({ camper }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -18,7 +18,7 @@ export const CamperDetails = ({ camper }) => {
         <div className={style.title}>
           <h2>{camper.name}</h2>
           <div className={style.priceBox}>
-            <h2>€{camper.price}</h2>
+            <h2 className={style.price}>€<DisplayNumber number={camper.price} /></h2>
             <svg
               className={`${style.svgHeart} ${isFavorite ? style.favorite : ""}`}
               width="22"
@@ -47,15 +47,16 @@ export const CamperDetails = ({ camper }) => {
               )}
             </p>
           </div>
-          
-          <svg className={style.svg} width="16" height="16">
-            <use href={`${icons}#icon-map-pin`}></use>
-          </svg>
-          <span>{camper.location}</span>
+          <div className={style.ratingBox}>
+            <svg className={style.svgMap} width="16" height="16">
+              <use href={`${icons}#icon-map-pin`}></use>
+            </svg>
+            <span>{camper.location}</span>
+          </div>          
         </div>
       </div>        
-        <p className={style.description}>{camper.description}</p>
-        <Features camper={camper} />      
+      <p className={style.description}>{camper.description}</p>
+      <Features camper={camper} />      
     </div>
   );
 };
