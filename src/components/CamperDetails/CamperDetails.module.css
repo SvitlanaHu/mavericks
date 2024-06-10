@@ -29,17 +29,25 @@ h2 {
   display: flex;
   flex-direction: row;
 }
+.favoriteButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+}
 .svgHeart {
   fill: var(--white);
   stroke: var(--main-text);
   cursor: pointer;
-  transition: fill 0.3s;
+  transition: fill 0.15s ease-in-out, stroke 0.15s ease-in-out;
 }
-.favorite {
+
+.favoriteButton.active .svgHeart {
   fill: var(--button);
   stroke: var(--button);
-  cursor: pointer;
 }
+
 .ratingContainer {
   display: flex;
   flex-direction: row;

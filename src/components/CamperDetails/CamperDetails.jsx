@@ -1,16 +1,30 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import style from "./CamperDetails.module.css";
 import icons from "../../images/sprite.svg";
+import { selectFavoritesIDs } from "../../Redux/selectors";
+import { toggleFavorite } from "../../Redux/camperSlice";
 import { Features } from "../Features/Features";
 import DisplayNumber from '../DisplayNumber/DisplayNumber';
 
 export const CamperDetails = ({ camper }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
+  const favoritesIDs = useSelector(selectFavoritesIDs);
 
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
-    // Додайте код для додавання/видалення з обраних, якщо потрібно
+  useEffect(() => {
+    if (!favoritesIDs.length) return;
+
+    for (let i = 0; i < favoritesIDs.length; i++)
+      document
+        .getElementById(`favorite${favoritesIDs[i]}`)
+        .classList.add(style.active);
+  }, [favoritesIDs, favoritesIDs.length]);
+
+  const handleFavorite = (event) => {
+    const _id = event.currentTarget.dataset.camperid;
+    dispatch(toggleFavorite(_id));
+    event.currentTarget.classList.toggle(style.active);
   };
 
   return (
@@ -20,14 +34,22 @@ export const CamperDetails = ({ camper }) => {
           <h2>{camper.name}</h2>
           <div className={style.priceBox}>
             <h2 className={style.price}>€<DisplayNumber number={camper.price} /></h2>
-            <svg
-              className={`${style.svgHeart} ${isFavorite ? style.favorite : ""}`}
-              width="22"
-              height="22"
-              onClick={toggleFavorite}
+            <button
+              id={`favorite${camper._id}`}
+              type="button"
+              data-camperid={camper._id}
+              className={style.favoriteButton}
+              onClick={handleFavorite}
             >
-              <use href={`${icons}#icon-heart`}></use>
-            </svg>
+              <svg
+                className={style.svgHeart} 
+                width="22"
+                height="22"
+              >
+                <use href={`${icons}#icon-heart`}></use>
+              </svg>
+            </button>
+            
           </div>        
         </div>
         <div className={style.ratingContainer}>
@@ -66,6 +88,7 @@ CamperDetails.propTypes = {
   camper: PropTypes.shape({
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    _id: PropTypes.string.isRequired,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
         reviewer_rating: PropTypes.number.isRequired,

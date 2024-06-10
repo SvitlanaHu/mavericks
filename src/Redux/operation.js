@@ -7,6 +7,7 @@ export const fetchCamperList = createAsyncThunk(
     try {
       const response = await api("/Campers");
       response.campersCount = response.data.length;
+
       const { data, campersCount } = response;
       const editedData = data.slice(0, showedCamps);
       const Editedresponse = { data: editedData, campersCount };

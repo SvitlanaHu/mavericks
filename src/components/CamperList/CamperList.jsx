@@ -1,47 +1,95 @@
 import { useDispatch, useSelector } from "react-redux";
-import { CamperListItem } from "../CamperListItem/CamperListItem";
-import style from "./CamperList.module.css";
-import { useEffect, useState } from "react";
-import { fetchCamperList } from "../../Redux/operation";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
-  selectCampersCounr,
+  selectCampersCount, 
   selectGetCamperList,
   selectIsLoading,
+  selectFavoritesIDs,
+  selectShowedVans,
 } from "../../Redux/selectors";
+import { fetchCamperList } from "../../Redux/operation";
+import { showMore } from "../../Redux/camperSlice";
+import { CamperListItem } from "../CamperListItem/CamperListItem";
+import style from "./CamperList.module.css";
 
-export const CamperList = () => {
-  const [showedCamps, setShowedCamps] = useState(4);
+
+export const CamperList = () => {  
+  const location = useLocation();
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const camperList = useSelector(selectGetCamperList);
-  const campersCount = useSelector(selectCampersCounr);
-
-  function handleLoadMore() {
-    setShowedCamps((prev) => prev + 4);
-  }
+  const campersCount = useSelector(selectCampersCount);
+  const showedVans = useSelector(selectShowedVans);
+  const favoriteCampers = useSelector(selectFavoritesIDs);
 
   useEffect(() => {
-    dispatch(fetchCamperList(showedCamps));
-  }, [dispatch, showedCamps]);
+    dispatch(fetchCamperList());
+  }, [dispatch]);
+
+  function handleLoadMore() {
+    const newShowedVans = showedVans + 4;
+    dispatch(showMore(newShowedVans));
+    dispatch(fetchCamperList(newShowedVans));
+  }
 
   return (
-    <div className={style.wrapper}>
-      <ul className={style.box}>
-        {selectIsLoading &&
-          camperList?.map((camper) => {
-            return (
-              <li key={camper._id}>
-                <CamperListItem camper={camper} />
-              </li>
-            );
-          })}
-      </ul>
-      <div></div>
-      {showedCamps < campersCount && (
-        <button className={style.btn} type="button" onClick={handleLoadMore}>
-          Load more
-        </button>
-       
+    <>
+      {location.pathname === "/catalog" && (
+        <div className={style.wrapper}>
+          <ul className={style.box}>
+            {!isLoading &&
+              camperList
+                ?.map((camper) => {
+                  return (
+                    <li key={camper._id}>
+                      <CamperListItem camper={camper} />
+                    </li>
+                  );
+                })}
+          </ul>
+          {campersCount > showedVans && (
+            <button
+              className={style.btn}
+              type="button"
+              onClick={handleLoadMore}
+            >
+              Load more
+            </button>       
+          )}
+        </div>
       )}
-    </div>
+      {location.pathname === "/favorite" && (
+        <div className={style.wrapper}>
+          {favoriteCampers.length ? (
+            <ul>
+              {!isLoading &&
+                camperList
+                  ?.filter((camper) => favoriteCampers.includes(camper._id))
+                  .map((camper) => (
+                    <li key={camper._id}>
+                      <CamperListItem camper={camper} />
+                    </li>
+                  ))}
+            </ul>
+          ) : (
+            <div className={style.infoWrapper}>
+              <div className={style.img}>
+                <img src="/src/images/camper.svg" alt="My camper"  className={style.svg} />
+              </div>
+                
+              <div className={style.content}>
+                <p className={style.info}>
+                  There is no any favorite campers yet...
+                </p>
+                <Link to="/catalog" className={style.link}>
+                  Try to choose one!!!
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
+      )}    
+    </>
   );
 };
