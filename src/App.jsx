@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { HomePage } from "./Pages/HomePage/HomePage";
-import { CatalogPage } from "./Pages/CatalogPage/CatalogPage";
-import { FavoritesPage } from "./Pages/FavoritesPage/FavoritesPage";
-import { ModalDetailsPage } from "./components/modal/ModalDetailsPage";
+import { HomePage } from "./Pages/HomePage";
+import { CatalogPage } from "./Pages/CatalogPage";
+import { FavoritesPage } from "./Pages/FavoritesPage";
+import { ModalDetailsPage } from "./components/ModalDetailsPage/ModalDetailsPage";
 import { CamperFeatures } from "./components/CamperFeatures/CamperFeatures";
 import { CamperReviews } from "./components/CamperReviews/CamperReviews";
 import { Layout } from "./components/Layout/Layout";

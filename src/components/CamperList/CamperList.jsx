@@ -62,7 +62,7 @@ export const CamperList = () => {
       {location.pathname === "/favorite" && (
         <div className={style.wrapper}>
           {favoriteCampers.length ? (
-            <ul>
+            <ul className={style.box}>
               {!isLoading &&
                 camperList
                   ?.filter((camper) => favoriteCampers.includes(camper._id))

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import style from './CatalogPage.module.css'
-import { FilterBar } from '../../components/FilterBar/FilterBar';
-import { CamperList } from "../../components/CamperList/CamperList";
+import style from './SharedStyles.module.css';
+import { FilterBar } from '../components/FilterBar/FilterBar';
+import { CamperList } from "../components/CamperList/CamperList";
 
 export const CatalogPage = () => {
   return (
