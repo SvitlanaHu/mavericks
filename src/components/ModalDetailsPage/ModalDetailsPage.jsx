@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from 'prop-types';
 import { CamperRentForm } from "../CamperRentForm/CamperRentForm";
 import { CamperFeatures } from "../CamperFeatures/CamperFeatures";
 import { CamperDetailsInfo } from "../CamperDetailsInfo/CamperDetailsInfo";
 import { CamperImgGallery } from "../CamperImgGallery/CamperImgGallery";
 import { CamperReviews } from "../CamperReviews/CamperReviews";
+import TextTruncate from '../TextTruncate/TextTruncate'; 
+import icons from "../../images/sprite.svg";
 import styles from "./ModalDetailsPage.module.css";
 
-export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }) => {
+export const ModalDetailsPage = ({ closeModal, camper, onClose, reviewCount, city, country }) => {
+  const [modalReadOpen, setModalReadOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("features");
 
   const handleBackdropClick = (e) => {
@@ -16,20 +18,26 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
       onClose();
     }
   };
-  const handleKeyDown = (event) => {
+
+  const handleKeyDown = useCallback((event) => {
     if (event.key === "Escape") {
       onClose();
     }
-  };
+  }, [onClose]);
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [handleKeyDown]);
 
   const handleTabChange = (newValue) => {
     setActiveTab(newValue);
+  };
+
+  const handleReadMore = () => {
+    setModalReadOpen(!modalReadOpen);
   };
 
   return (
@@ -45,7 +53,7 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
                     <use href="/symbol-defs.svg#icon-rating"></use>
                   </svg>
                   <span className={styles.ratingText}>
-                    {camper.rating}({reviewCount} Reviews)
+                    {camper.rating} ({reviewCount} Reviews)
                   </span>
                 </div>
                 <div className={styles.locationBlock}>
@@ -59,32 +67,35 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
               </div>
               <p className={styles.price}>€{camper.price},00</p>
             </div>
-              <svg className={styles.closeButton}>
-                <use href="/symbol-defs.svg#icon-close"></use>
-              </svg> 
-            </div>
-
+            <button
+              type="button"
+              className={styles.buttonClose}
+              onClick={closeModal}
+            >
+              <svg className={styles.iconFill} width="16" height="16">
+                <use href={`${icons}#icon-close`}></use>
+              </svg>
+            </button>
+          </div>
           <div className={styles.detailedInfo}>
             <CamperImgGallery camper={camper} />
-            <p className={styles.desc}>{camper.description}</p>
+            <p className={styles.description}>
+              {camper.description}
+              <TextTruncate descr={`${camper.description}`} />
+            </p>
           </div>
-
           <div className={styles.featureReviews}>
             <div className={styles.tabs}>
               <button
                 type="button"
-                className={`${styles.chooseBtn} ${
-                  activeTab === "features" ? styles.active : ""
-                }`}
+                className={`${styles.chooseBtn} ${activeTab === "features" ? styles.active : ""}`}
                 onClick={() => handleTabChange("features")}
               >
                 Features
               </button>
               <button
                 type="button"
-                className={`${styles.chooseBtn} ${
-                  activeTab === "reviews" ? styles.active : ""
-                }`}
+                className={`${styles.chooseBtn} ${activeTab === "reviews" ? styles.active : ""}`}
                 onClick={() => handleTabChange("reviews")}
               >
                 Reviews
@@ -102,7 +113,6 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
                   <CamperReviews reviews={camper.reviews} />
                 </div>
               )}
-
               <CamperRentForm />
             </div>
           </div>
@@ -113,6 +123,7 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
 };
 
 ModalDetailsPage.propTypes = {
+  closeModal: PropTypes.func.isRequired,
   camper: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -121,15 +132,20 @@ ModalDetailsPage.propTypes = {
     description: PropTypes.string.isRequired,
     reviews: PropTypes.arrayOf(
       PropTypes.shape({
-      author: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-      comment: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-    })
+        author: PropTypes.string.isRequired,
+        rating: PropTypes.number.isRequired,
+        comment: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      })
     ).isRequired,
+    features: PropTypes.arrayOf(PropTypes.string).isRequired,
+    details: PropTypes.object.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
   reviewCount: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   country: PropTypes.string.isRequired,
 };
+
+export default ModalDetailsPage;

@@ -43,13 +43,26 @@
   display: flex;
   justify-content: space-between;
 }
-.closeButton {
+
+.buttonClose {
+  /* display: flex;
+  margin-left: auto; */
   width: 32px;
   height: 32px;
   top: 40px;
   right: 40px;
   cursor: pointer;
+  border: none;
+  background-color: var(--white);
+  fill: var(--main);
+  stroke: var(--main);
 }
+.buttonClose:hover,
+.buttonClose:focus {
+  stroke: var(--button);
+  fill: var(--button);
+}
+
 .mainInfo {
   display: flex;
   flex-direction: column;
@@ -104,8 +117,8 @@
   margin-top: 24px;
 }
 
-.desc {
-  color: var(--border);
+.description {
+  color: var(--main);
   font-size: 16px;
   line-height: 24px;
 }
@@ -122,7 +135,7 @@
   border: none;
   outline: none;
   cursor: pointer;
-  color: var(--main-text-color);
+  color: var(--main);
   font-size: 20px;
   line-height: 24px;
   font-weight: 600;
@@ -130,7 +143,7 @@
 }
 .active {
   outline: none;
-  border-bottom: 5px solid var(--button);
+  border-bottom: 5px solid var(--button-active);
   margin-bottom: -2px;
   z-index: 1;
 }
