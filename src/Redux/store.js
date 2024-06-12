@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   persistReducer,
-  FLUSH, 
+  FLUSH,
   REHYDRATE,
   PAUSE,
   PERSIST,
@@ -22,7 +22,7 @@ export const store = configureStore({
   reducer: {
     camperData: persistReducer(camperPersistConfig, camperReducer)
   },
-  
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -32,4 +32,4 @@ export const store = configureStore({
 });
 
 const persistor = persistStore(store, null);
-export {persistor}
+export { persistor }

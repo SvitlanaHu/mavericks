@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import icons from "../../images/sprite.svg";
 import styles from "./CamperReviewItem.module.css";
 
 export const CamperReviewItem = ({ review }) => {
@@ -16,14 +17,14 @@ export const CamperReviewItem = ({ review }) => {
           <span>{review.reviewer_name}</span>
           <div className={styles.count}>
             {stars.map((_, index) => (
-              <svg
+              <svg 
                 key={index}
                 className={`${styles.ratingSvg} ${
                   index < rating ? styles.filled : ""
                 }`}
               >
-                <use href="/symbol-defs.svg#icon-rating"></use>
-              </svg>
+                <use href={`${icons}#icon-ratingstar`}></use>
+              </svg>              
             ))}
           </div>
         </div>
