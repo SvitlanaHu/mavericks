@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import { CamperReviewItem } from "../CamperReviewItem/CamperReviewItem";
-import style from "./CamperReviews.module.css";
+import styles from "./CamperReviews.module.css";
 
 export const CamperReviews = ({ reviews }) => {
   console.log(reviews);
   return (
-    <ul className={style.container}>
+    <ul className={styles.container}>
       {reviews.map((review, index) => (
         <CamperReviewItem key={index} review={review} />
       ))}

@@ -3,12 +3,12 @@ import clsx from "clsx";
 import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
-import style from "./NavBar.module.css";
+import styles from "./NavBar.module.css";
 import { selectFavoritesIDs } from "../../Redux/selectors";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 const buildLinkClass = ({ isActive }) => {
-  return clsx(style.link, isActive && style.active);
+  return clsx(styles.link, isActive && styles.active);
 };
 
 export const NavBar = () => {
@@ -25,14 +25,14 @@ export const NavBar = () => {
   }, [favoriteCount]);
 
   return (
-    <nav className={style.wrapper}>
-      <ul className={style.list}>
-        <li key={nanoid()} className={style.listItem}>
+    <nav className={styles.wrapper}>
+      <ul className={styles.list}>
+        <li key={nanoid()} className={styles.listItem}>
           <NavLink className={buildLinkClass} to="/catalog">
             <span>Catalog</span>
           </NavLink>
         </li>
-        <li key={nanoid()} className={style.listItem}>
+        <li key={nanoid()} className={styles.listItem}>
           <NavLink className={buildLinkClass} to="/favorite">
             <span>Favorite</span>
           </NavLink>

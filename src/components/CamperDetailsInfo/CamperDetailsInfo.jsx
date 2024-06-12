@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from "./CamperDetailsInfo.module.css";
+import styles from "./CamperDetailsInfo.module.css";
 
 export const CamperDetailsInfo = ({ camper }) => {
   function formatStringValue(value) {
@@ -7,31 +7,31 @@ export const CamperDetailsInfo = ({ camper }) => {
   }
 
   return (
-    <div className={style.details}>
-      <h3 className={style.subTitle}>Vehicle details</h3>
-      <hr className={style.line} />
-      <ul className={style.detailsList}>
-        <li className={style.detailsItem}>
+    <div className={styles.details}>
+      <h3 className={styles.subTitle}>Vehicle details</h3>
+      <hr className={styles.line} />
+      <ul className={styles.detailsList}>
+        <li className={styles.detailsItem}>
           <span>Form</span>
           <span style={{ textTransform: "capitalize" }}>{camper.form}</span>
         </li>
-        <li className={style.detailsItem}>
+        <li className={styles.detailsItem}>
           <span>Length</span>
           <span>{formatStringValue(camper.length)}</span>
         </li>
-        <li className={style.detailsItem}>
+        <li className={styles.detailsItem}>
           <span>Width</span>
           <span>{formatStringValue(camper.width)}</span>
         </li>
-        <li className={style.detailsItem}>
+        <li className={styles.detailsItem}>
           <span>Height</span>
           <span>{formatStringValue(camper.height)}</span>
         </li>
-        <li className={style.detailsItem}>
+        <li className={styles.detailsItem}>
           <span>Tank</span>
           <span>{formatStringValue(camper.tank)}</span>
         </li>
-        <li className={style.detailsItem}>
+        <li className={styles.detailsItem}>
           <span>Consumption</span>
           <span>{camper.consumption}</span>
         </li>

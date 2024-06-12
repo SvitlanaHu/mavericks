@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from "./CamperReviewItem.module.css";
+import styles from "./CamperReviewItem.module.css";
 
 export const CamperReviewItem = ({ review }) => {
   const letter = review.reviewer_name.charAt(0);
@@ -7,19 +7,19 @@ export const CamperReviewItem = ({ review }) => {
   const stars = Array(5).fill(0);
 
   return (
-    <div className={style.reviewBlock}>
-      <div className={style.reviewerCont}>
-        <div className={style.avatar}>
+    <div className={styles.reviewBlock}>
+      <div className={styles.reviewerCont}>
+        <div className={styles.avatar}>
           <p>{letter}</p>
         </div>
-        <div className={style.rating}>
+        <div className={styles.rating}>
           <span>{review.reviewer_name}</span>
-          <div className={style.count}>
+          <div className={styles.count}>
             {stars.map((_, index) => (
               <svg
                 key={index}
-                className={`${style.ratingSvg} ${
-                  index < rating ? style.filled : ""
+                className={`${styles.ratingSvg} ${
+                  index < rating ? styles.filled : ""
                 }`}
               >
                 <use href="/symbol-defs.svg#icon-rating"></use>
@@ -28,7 +28,7 @@ export const CamperReviewItem = ({ review }) => {
           </div>
         </div>
       </div>
-      <p className={style.reviewText}>{review.comment}</p>
+      <p className={styles.reviewText}>{review.comment}</p>
     </div>
   );
 };

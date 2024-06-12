@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import style from "./CamperFeatures.module.css";
+import styles from "./CamperFeatures.module.css";
 
 import { TbAutomaticGearbox } from "react-icons/tb";
 import { FaWind } from "react-icons/fa";
@@ -17,10 +17,10 @@ import { MdMicrowave } from "react-icons/md";
 
 export const CamperFeatures = ({ camper }) => {
   return (
-    <ul className={style.advList}>
+    <ul className={styles.advList}>
       {camper.adults && (
-        <li className={style.adItem}>
-          <svg className={style.icon}>
+        <li className={styles.adItem}>
+          <svg className={styles.icon}>
             <use href="/symbol-defs.svg#icon-Users"></use>
           </svg>{" "}
           {camper.adults} adults
@@ -28,87 +28,87 @@ export const CamperFeatures = ({ camper }) => {
       )}
 
       {camper.transmission && (
-        <li className={style.adItem}>
-          <TbAutomaticGearbox className={style.icon} />
+        <li className={styles.adItem}>
+          <TbAutomaticGearbox className={styles.icon} />
           <p>{camper.transmission}</p>
         </li>
       )}
 
       {camper.details.airConditioner > 0 && (
-        <li className={style.adItem}>
-          <FaWind className={style.icon} />
+        <li className={styles.adItem}>
+          <FaWind className={styles.icon} />
           <p>AC</p>
         </li>
       )}
 
       {camper.engine && (
-        <li className={style.adItem}>
-          <MdOutlineLocalGasStation className={style.icon} />
+        <li className={styles.adItem}>
+          <MdOutlineLocalGasStation className={styles.icon} />
           {camper.engine}
         </li>
       )}
 
       {camper.details.kitchen > 0 && (
-        <li className={style.adItem}>
-          <TbToolsKitchen2 className={style.icon} /> Kitchen
+        <li className={styles.adItem}>
+          <TbToolsKitchen2 className={styles.icon} /> Kitchen
         </li>
       )}
 
       {camper.details.beds > 0 && (
-        <li className={style.adItem}>
-          <IoBedOutline className={style.icon} />
+        <li className={styles.adItem}>
+          <IoBedOutline className={styles.icon} />
           {camper.details.beds} beds
         </li>
       )}
 
       {camper.details.airConditioner > 0 && (
-        <li className={style.adItem}>
-          <TbAirConditioning className={style.icon} />
+        <li className={styles.adItem}>
+          <TbAirConditioning className={styles.icon} />
           {camper.details.airConditioner} airConditioner
         </li>
       )}
 
       {camper.details.CD > 0 && (
-        <li className={style.adItem}>
-          <LiaCompactDiscSolid className={style.icon} /> CD
+        <li className={styles.adItem}>
+          <LiaCompactDiscSolid className={styles.icon} /> CD
         </li>
       )}
 
       {camper.details.radio > 0 && (
-        <li className={style.adItem}>
-          <IoMdRadio className={style.icon} />
+        <li className={styles.adItem}>
+          <IoMdRadio className={styles.icon} />
           Radio
         </li>
       )}
 
       {camper.details.hob > 0 && (
-        <li className={style.adItem}>
-          <TbCooker className={style.icon} />
+        <li className={styles.adItem}>
+          <TbCooker className={styles.icon} />
           {camper.details.hob} hob
         </li>
       )}
 
       {camper.details.freezer > 0 && (
-        <li className={style.adItem}>
-          <TbFridge className={style.icon} /> freezer
+        <li className={styles.adItem}>
+          <TbFridge className={styles.icon} /> freezer
         </li>
       )}
 
       {camper.details.TV > 0 && (
-        <li className={style.adItem}>
-          <PiTelevisionSimple className={style.icon} /> TV
+        <li className={styles.adItem}>
+          <PiTelevisionSimple className={styles.icon} /> TV
         </li>
       )}
 
       {camper.details.bathroom > 0 && (
-        <li className={style.adItem}>
-          <LuShowerHead className={style.icon} /> Bathroom
+        <li className={styles.adItem}>
+          <LuShowerHead className={styles.icon} /> Bathroom
         </li>
       )}
 
       {camper.details.microwave > 0 && (
-        <li className={style.adItem}>
-          <MdMicrowave className={style.icon} /> Microwave
+        <li className={styles.adItem}>
+          <MdMicrowave className={styles.icon} /> Microwave
         </li>
       )}
     </ul>

@@ -1,6 +1,6 @@
 
 import { useDispatch } from "react-redux";
-import style from "./FilterForm.module.css";
+import styles from "./FilterForm.module.css";
 import icons from "../../images/sprite.svg";
 import { resetFilters, setFilters } from "../../Redux/camperSlice";
 
@@ -25,25 +25,25 @@ export const FilterForm = () => {
   };
 
   const handleChangeCheckBox = (event) => {
-    event.currentTarget.classList.toggle(style.checked);
+    event.currentTarget.classList.toggle(styles.checked);
   };
 
   const resetRadio = () => {
     ["radio11", "radio21", "radio31"].forEach((id) => {
-      document.getElementById(id).classList.remove(style.checked);
+      document.getElementById(id).classList.remove(styles.checked);
     });
   };
 
   const handleChangeRadio = (event) => {
     resetRadio();
-    event.currentTarget.classList.add(style.checked);
+    event.currentTarget.classList.add(styles.checked);
   };
 
    const handleResetFilters = () => {
     dispatch(resetFilters());
     document.getElementById("locationInput").value = "";
-    document.querySelectorAll(`.${style.checked}`).forEach((element) => {
-      element.classList.remove(style.checked);
+    document.querySelectorAll(`.${styles.checked}`).forEach((element) => {
+      element.classList.remove(styles.checked);
     });
     resetRadio();
   };
@@ -52,30 +52,30 @@ export const FilterForm = () => {
   const equipmentGroup2 = ["Kitchen", "TV", "CD", "Radio", "Shower", "Water", "Freezer", "Conditioner", "Microwave"];
 
   return (
-    <div className={style.wrapper}>
-      <form className={style.formContainer} onSubmit={handleSubmit}>
-        <div className={style.formlocalGroup}>
-          <label className={style.label} htmlFor="locationInput">Location</label>
+    <div className={styles.wrapper}>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
+        <div className={styles.formlocalGroup}>
+          <label className={styles.label} htmlFor="locationInput">Location</label>
           <input
             type="text"
             name="locationInput"
             placeholder="Kyiv, Ukraine"
             id="locationInput"
-            className={style.locatonInput}
+            className={styles.locatonInput}
           />
-          <svg className={style.iconMap} width="20" height="22">
+          <svg className={styles.iconMap} width="20" height="22">
             <use href={`${icons}#icon-map-pin`}></use>
           </svg>
         </div>
         
-        <div className={style.formGroup}>
+        <div className={styles.formGroup}>
           <label>Filters</label>
-          <h3 className={style.title}>Vehicle equipment</h3>
+          <h3 className={styles.title}>Vehicle equipment</h3>
           <ul>
             {equipmentGroup1.map((item, index) => (
               <li key={`group1-checkbox-${item}`}>
-                <label className={style.label}>
-                  <svg className={style.iconFill} width="32" height="32">
+                <label className={styles.label}>
+                  <svg className={styles.iconFill} width="32" height="32">
                     <use href={`${icons}#icon-${item.toLowerCase()}`}></use>
                   </svg>
                   {item}
@@ -91,8 +91,8 @@ export const FilterForm = () => {
             ))}
             {equipmentGroup2.map((item, index) => (
               <li key={`group2-checkbox-${item}`}>
-                <label className={style.label}>
-                  <svg className={style.icon} width="32" height="32">
+                <label className={styles.label}>
+                  <svg className={styles.icon} width="32" height="32">
                     <use href={`${icons}#icon-${item.toLowerCase()}`}></use>
                   </svg>
                   {item}
@@ -108,7 +108,7 @@ export const FilterForm = () => {
             ))}
           </ul>
         </div>
-        <div className={style.formGroup}>
+        <div className={styles.formGroup}>
             <h3>Vehicle type</h3>
           <ul>
             {[
@@ -117,13 +117,13 @@ export const FilterForm = () => {
               { id: "radio31", label: "Van", value: "panelTruck", icon: "camper-van" },
             ].map((radio, index) => (
               <li key={`radio-${radio.id}`}>
-                <label className={style.label}>
+                <label className={styles.label}>
                   <div
-                    className={style.radioBox}
+                    className={styles.radioBox}
                     onClick={handleChangeRadio}
                     id={radio.id}
                   >
-                    <svg className={style.iconFill} width="32" height="32">
+                    <svg className={styles.iconFill} width="32" height="32">
                       <use href={`${icons}#icon-${radio.icon}`}></use>
                     </svg>
                     {radio.label}
@@ -140,14 +140,14 @@ export const FilterForm = () => {
           </ul>
         </div>
 
-        <div className={style.btnContainer}>
+        <div className={styles.btnContainer}>
           <button
-            className={style.btn}
+            className={styles.btn}
             type="submit"
           >
             Search
           </button>
-          <p className={style.resetFilters} onClick={handleResetFilters}>
+          <p className={styles.resetFilters} onClick={handleResetFilters}>
             Reset filters?
           </p>
         </div>

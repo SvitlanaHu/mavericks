@@ -1,12 +1,12 @@
 import { useEffect, forwardRef } from "react";
-import style from "./LogoText.module.css";
+import styles from "./LogoText.module.css";
 
 export const LogoText = forwardRef((props, ref) => {
 
   useEffect(() => {
     const tId = setTimeout(() => {
       if (ref.current) {
-        ref.current.classList.add(style.moved);
+        ref.current.classList.add(styles.moved);
       }
     }, 2500);
 
@@ -16,8 +16,8 @@ export const LogoText = forwardRef((props, ref) => {
   }, [ref]);
 
   return (
-    <h2 ref={ref} className={style.logoText}>
-      RENTAL<span className={style.spanOf}>of</span><span className={style.spanCamper}>CAMPER</span>
+    <h2 ref={ref} className={styles.logoText}>
+      RENTAL<span className={styles.spanOf}>of</span><span className={styles.spanCamper}>CAMPER</span>
     </h2>
   );
 });

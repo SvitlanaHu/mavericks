@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-import style from "./CamperImgGallery.module.css";
+import styles from "./CamperImgGallery.module.css";
 
 export const CamperImgGallery = ({ camper }) => {
   return (
-    <ul className={style.imgList}>
+    <ul className={styles.imgList}>
       {camper.gallery.map((image, index) => (
-        <li key={index} className={style.imgListItem}>
+        <li key={index} className={styles.imgListItem}>
           <img
             src={image}
             alt={`Camper image ${index + 1}`}
-            className={style.galleryImage}
+            className={styles.galleryImage}
           />
         </li>
       ))}

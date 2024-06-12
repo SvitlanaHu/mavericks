@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
-import style from "./CamperDetails.module.css";
+import styles from "./CamperDetails.module.css";
 import icons from "../../images/sprite.svg";
 import { selectFavoritesIDs } from "../../Redux/selectors";
 import { toggleFavorite } from "../../Redux/camperSlice";
@@ -18,31 +18,31 @@ export const CamperDetails = ({ camper }) => {
     for (let i = 0; i < favoritesIDs.length; i++)
       document
         .getElementById(`favorite${favoritesIDs[i]}`)
-        .classList.add(style.active);
+        .classList.add(styles.active);
   }, [favoritesIDs, favoritesIDs.length]);
 
   const handleFavorite = (event) => {
     const _id = event.currentTarget.dataset.camperid;
     dispatch(toggleFavorite(_id));
-    event.currentTarget.classList.toggle(style.active);
+    event.currentTarget.classList.toggle(styles.active);
   };
 
   return (
-    <div className={style.details}>
-      <div className={style.titleBox}>
-        <div className={style.title}>
+    <div className={styles.details}>
+      <div className={styles.titleBox}>
+        <div className={styles.title}>
           <h2>{camper.name}</h2>
-          <div className={style.priceBox}>
-            <h2 className={style.price}>€<DisplayNumber number={camper.price} /></h2>
+          <div className={styles.priceBox}>
+            <h2 className={styles.price}>€<DisplayNumber number={camper.price} /></h2>
             <button
               id={`favorite${camper._id}`}
               type="button"
               data-camperid={camper._id}
-              className={style.favoriteButton}
+              className={styles.favoriteButton}
               onClick={handleFavorite}
             >
               <svg
-                className={style.svgHeart} 
+                className={styles.svgHeart} 
                 width="22"
                 height="22"
               >
@@ -52,9 +52,9 @@ export const CamperDetails = ({ camper }) => {
             
           </div>        
         </div>
-        <div className={style.ratingContainer}>
-          <div className={style.ratingBox}>
-            <svg className={style.svgRating} width="16" height="16">
+        <div className={styles.ratingContainer}>
+          <div className={styles.ratingBox}>
+            <svg className={styles.svgRating} width="16" height="16">
               <use href={`${icons}#icon-ratingstar`}></use>
             </svg>
             <p>
@@ -70,15 +70,15 @@ export const CamperDetails = ({ camper }) => {
               )}
             </p>
           </div>
-          <div className={style.ratingBox}>
-            <svg className={style.svgMap} width="16" height="16">
+          <div className={styles.ratingBox}>
+            <svg className={styles.svgMap} width="16" height="16">
               <use href={`${icons}#icon-map-pin`}></use>
             </svg>
             <span>{camper.location}</span>
           </div>          
         </div>
       </div>        
-      <p className={style.description}>{camper.description}</p>
+      <p className={styles.description}>{camper.description}</p>
       <Features camper={camper} />      
     </div>
   );

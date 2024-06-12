@@ -1,10 +1,10 @@
 import { FilterBar } from '../components/FilterBar/FilterBar';
-import style from './SharedStyles.module.css';
+import styles from './SharedStyles.module.css';
 
 export const HomePage = () => {
   return <>
 
-  <div className={style.wrapper}>
+  <div className={styles.wrapper}>
     <aside>
       <FilterBar/>
     </aside>

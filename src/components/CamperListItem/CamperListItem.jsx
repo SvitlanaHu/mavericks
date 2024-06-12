@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
-import style from "./CamperListItem.module.css";
+import styles from "./CamperListItem.module.css";
 
 import { HeroImage } from "../HeroImage/HeroImage";
 import { CamperDetails } from "../CamperDetails/CamperDetails";
 
 export const CamperListItem = ({ camper }) => {
   return (
-    <div className={style.wrapper}>
+    <div className={styles.wrapper}>
       <HeroImage image={camper.gallery[0]} />
-      <div className={style.content}>
+      <div className={styles.content}>
         <CamperDetails camper={camper} />
-        <button className={style.btn} type="button">Show more</button>
+        <button className={styles.btn} type="button">Show more</button>
       </div>      
     </div>
   );

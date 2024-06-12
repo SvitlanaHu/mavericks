@@ -12,7 +12,7 @@ import { fetchCamperList } from "../../Redux/operation";
 import { showMore } from "../../Redux/camperSlice";
 import { CamperListItem } from "../CamperListItem/CamperListItem";
 import logo from "../../images/camper.svg";
-import style from "./CamperList.module.css";
+import styles from "./CamperList.module.css";
 
 
 export const CamperList = () => {  
@@ -37,8 +37,8 @@ export const CamperList = () => {
   return (
     <>
       {location.pathname === "/catalog" && (
-        <div className={style.wrapper}>
-          <ul className={style.box}>
+        <div className={styles.wrapper}>
+          <ul className={styles.box}>
             {!isLoading &&
               camperList
                 ?.map((camper) => {
@@ -51,7 +51,7 @@ export const CamperList = () => {
           </ul>
           {campersCount > showedVans && (
             <button
-              className={style.btn}
+              className={styles.btn}
               type="button"
               onClick={handleLoadMore}
             >
@@ -61,9 +61,9 @@ export const CamperList = () => {
         </div>
       )}
       {location.pathname === "/favorite" && (
-        <div className={style.wrapper}>
+        <div className={styles.wrapper}>
           {favoriteCampers.length ? (
-            <ul className={style.box}>
+            <ul className={styles.box}>
               {!isLoading &&
                 camperList
                   ?.filter((camper) => favoriteCampers.includes(camper._id))
@@ -74,16 +74,16 @@ export const CamperList = () => {
                   ))}
             </ul>
           ) : (
-            <div className={style.infoWrapper}>
-              <div className={style.img}>
-                <img src={logo} alt="My camper"  className={style.svg} />
+            <div className={styles.infoWrapper}>
+              <div className={styles.img}>
+                <img src={logo} alt="My camper"  className={styles.svg} />
               </div>
                 
-              <div className={style.content}>
-                <p className={style.info}>
+              <div className={styles.content}>
+                <p className={styles.info}>
                   There is no any favorite campers yet...
                 </p>
-                <Link to="/catalog" className={style.link}>
+                <Link to="/catalog" className={styles.link}>
                   Try to choose one!!!
                 </Link>
               </div>

@@ -6,7 +6,7 @@ import { CamperFeatures } from "../CamperFeatures/CamperFeatures";
 import { CamperDetailsInfo } from "../CamperDetailsInfo/CamperDetailsInfo";
 import { CamperImgGallery } from "../CamperImgGallery/CamperImgGallery";
 import { CamperReviews } from "../CamperReviews/CamperReviews";
-import style from "./ModalDetailsPage.module.css";
+import styles from "./ModalDetailsPage.module.css";
 
 export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }) => {
   const [activeTab, setActiveTab] = useState("features");
@@ -33,48 +33,48 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
   };
 
   return (
-    <div className={style.backdrop} onClick={handleBackdropClick}>
-      <div className={style.modal}>
-        <div className={style.modalContent}>
-          <div className={style.headerBlock}>
-            <div className={style.mainInfo}>
+    <div className={styles.backdrop} onClick={handleBackdropClick}>
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <div className={styles.headerBlock}>
+            <div className={styles.mainInfo}>
               <h3>{camper.name}</h3>
-              <div className={style.ratingLocation}>
-                <div className={style.ratingBlock}>
-                  <svg className={style.ratingSvg}>
+              <div className={styles.ratingLocation}>
+                <div className={styles.ratingBlock}>
+                  <svg className={styles.ratingSvg}>
                     <use href="/symbol-defs.svg#icon-rating"></use>
                   </svg>
-                  <span className={style.ratingText}>
+                  <span className={styles.ratingText}>
                     {camper.rating}({reviewCount} Reviews)
                   </span>
                 </div>
-                <div className={style.locationBlock}>
-                  <svg className={style.locationSvg}>
+                <div className={styles.locationBlock}>
+                  <svg className={styles.locationSvg}>
                     <use href="/symbol-defs.svg#icon-map-pin"></use>
                   </svg> 
-                  <p className={style.location}>
+                  <p className={styles.location}>
                     {city}, {country}
                   </p>
                 </div>
               </div>
-              <p className={style.price}>€{camper.price},00</p>
+              <p className={styles.price}>€{camper.price},00</p>
             </div>
-              <svg className={style.closeButton}>
+              <svg className={styles.closeButton}>
                 <use href="/symbol-defs.svg#icon-close"></use>
               </svg> 
             </div>
 
-          <div className={style.detailedInfo}>
+          <div className={styles.detailedInfo}>
             <CamperImgGallery camper={camper} />
-            <p className={style.desc}>{camper.description}</p>
+            <p className={styles.desc}>{camper.description}</p>
           </div>
 
-          <div className={style.featureReviews}>
-            <div className={style.tabs}>
+          <div className={styles.featureReviews}>
+            <div className={styles.tabs}>
               <button
                 type="button"
-                className={`${style.chooseBtn} ${
-                  activeTab === "features" ? style.active : ""
+                className={`${styles.chooseBtn} ${
+                  activeTab === "features" ? styles.active : ""
                 }`}
                 onClick={() => handleTabChange("features")}
               >
@@ -82,23 +82,23 @@ export const ModalDetailsPage = ({ camper, onClose, reviewCount, city, country }
               </button>
               <button
                 type="button"
-                className={`${style.chooseBtn} ${
-                  activeTab === "reviews" ? style.active : ""
+                className={`${styles.chooseBtn} ${
+                  activeTab === "reviews" ? styles.active : ""
                 }`}
                 onClick={() => handleTabChange("reviews")}
               >
                 Reviews
               </button>
             </div>
-            <div className={style.moreInfo}>
+            <div className={styles.moreInfo}>
               {activeTab === "features" && (
-                <div className={style.features}>
+                <div className={styles.features}>
                   <CamperFeatures camper={camper} />
                   <CamperDetailsInfo camper={camper} />
                 </div>
               )}
               {activeTab === "reviews" && (
-                <div className={style.reviews}>
+                <div className={styles.reviews}>
                   <CamperReviews reviews={camper.reviews} />
                 </div>
               )}

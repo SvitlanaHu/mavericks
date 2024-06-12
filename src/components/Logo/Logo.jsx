@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/camper.svg";
-import style from "./Logo.module.css";
+import styles from "./Logo.module.css";
 import { useEffect, useRef } from "react";
 import { LogoText } from "../LogoText/LogoText";
 
@@ -9,23 +9,23 @@ export const Logo = () => {
   const logoText = useRef(null);
 
   useEffect(() => {
-    logoBtn.current.classList.add(style.show);
-    logoText.current.classList.add(style.moved);
+    logoBtn.current.classList.add(styles.show);
+    logoText.current.classList.add(styles.moved);
   }, []);
 
   const handleMouseEnter = () => {
-    logoText.current.classList.add(style.shadow);
+    logoText.current.classList.add(styles.shadow);
   };
 
   const handleMouseLeave = () => {
-    logoText.current.classList.remove(style.shadow);
+    logoText.current.classList.remove(styles.shadow);
   };
 
   return (
-    <div className={style.wrapper}>
+    <div className={styles.wrapper}>
       <Link
         to="/"
-        className={style.link}
+        className={styles.link}
         ref={logoBtn}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -33,7 +33,7 @@ export const Logo = () => {
         <img
           src={logo}
           alt="Logo of the company"
-          className={style.logo}
+          className={styles.logo}
         />
       </Link>
 
