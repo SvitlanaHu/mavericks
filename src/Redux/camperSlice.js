@@ -33,26 +33,13 @@ const camperSlice = createSlice({
       } else {
         state.favoritesIDs = [...state.favoritesIDs].filter((id) => id !== _id);
       }
-      console.log('toggleFavorite:', state.favoritesIDs);
     },
     setFilters: (state, action) => {
-      const { location, details, camperType } = action.payload;
-
-      if (location) {
-        state.filters.location = location;
-      }
-
-      if (details.length) {
-        state.filters.details = details;
-      }
-
-      if (camperType) {
-        state.filters.camperType = camperType;
-      }
+      state.filters = action.payload;
     },
     resetFilters: (state) => {
-      state.filters = { location: null, details: [], camperType: "" }
-    }
+      state.filters = {};
+    },
   },
 
   extraReducers: (builder) => {
@@ -70,5 +57,11 @@ const camperSlice = createSlice({
   },
 });
 
-export const { switchLoading, showMore, toggleFavorite, setFilters, resetFilters } = camperSlice.actions;
+export const {
+  switchLoading,
+  showMore,
+  toggleFavorite,
+  setFilters,
+  resetFilters
+} = camperSlice.actions;
 export const camperReducer = camperSlice.reducer;

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../services/apiMockapi.js";
+import apiMockapi from "../services/apiMockapi.js";
 
 export const fetchCamperList = createAsyncThunk(
   "getList",
   async (showedCamps, thunkAPI) => {
     try {
-      const response = await api("/Campers");
+      const response = await apiMockapi("/Campers");
       response.campersCount = response.data.length;
 
       const { data, campersCount } = response;

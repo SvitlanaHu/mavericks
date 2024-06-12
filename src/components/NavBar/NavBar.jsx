@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 import styles from "./NavBar.module.css";
-import { selectFavoritesIDs } from "../../Redux/selectors";
+import { selectFavoritesIDs } from "../../redux/selectors";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
 
 const buildLinkClass = ({ isActive }) => {

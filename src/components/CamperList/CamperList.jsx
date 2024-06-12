@@ -7,9 +7,9 @@ import {
   selectIsLoading,
   selectFavoritesIDs,
   selectShowedVans,
-} from "../../Redux/selectors";
-import { fetchCamperList } from "../../Redux/operation";
-import { showMore } from "../../Redux/camperSlice";
+} from "../../redux/selectors";
+import { fetchCamperList } from "../../redux/operation";
+import { showMore } from "../../redux/camperSlice";
 import { CamperListItem } from "../CamperListItem/CamperListItem";
 import logo from "../../images/camper.svg";
 import styles from "./CamperList.module.css";

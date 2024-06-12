@@ -2,7 +2,7 @@
 import { useDispatch } from "react-redux";
 import styles from "./FilterForm.module.css";
 import icons from "../../images/sprite.svg";
-import { resetFilters, setFilters } from "../../Redux/camperSlice";
+import { resetFilters, setFilters } from "../../redux/camperSlice";
 
 export const FilterForm = () => {  
   const dispatch = useDispatch();

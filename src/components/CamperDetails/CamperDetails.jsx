@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import styles from "./CamperDetails.module.css";
 import icons from "../../images/sprite.svg";
-import { selectFavoritesIDs } from "../../Redux/selectors";
-import { toggleFavorite } from "../../Redux/camperSlice";
+import { selectFavoritesIDs } from "../../redux/selectors";
+import { toggleFavorite } from "../../redux/camperSlice";
 import { Features } from "../Features/Features";
 import DisplayNumber from '../DisplayNumber/DisplayNumber';
 
