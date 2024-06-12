@@ -11,6 +11,7 @@ import {
 import { fetchCamperList } from "../../Redux/operation";
 import { showMore } from "../../Redux/camperSlice";
 import { CamperListItem } from "../CamperListItem/CamperListItem";
+import logo from "../../images/camper.svg";
 import style from "./CamperList.module.css";
 
 
@@ -75,7 +76,7 @@ export const CamperList = () => {
           ) : (
             <div className={style.infoWrapper}>
               <div className={style.img}>
-                <img src="/src/images/camper.svg" alt="My camper"  className={style.svg} />
+                <img src={logo} alt="My camper"  className={style.svg} />
               </div>
                 
               <div className={style.content}>
