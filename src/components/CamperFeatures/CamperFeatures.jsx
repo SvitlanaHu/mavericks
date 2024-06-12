@@ -7,7 +7,7 @@ export const CamperFeatures = ({ camper }) => {
     <ul className={styles.advList}>
       {camper.adults && (
         <li className={styles.adItem}>
-          <svg className={styles.icon}>
+          <svg className={styles.iconFill}>
             <use href={`${icons}#icon-users`}></use>
           </svg>{" "}
           {camper.adults} adults
@@ -34,7 +34,7 @@ export const CamperFeatures = ({ camper }) => {
 
       {camper.engine && (
         <li className={styles.adItem}>
-          <svg className={styles.icon}>
+          <svg className={styles.iconFill}>
             <use href={`${icons}#icon-fuel`}></use>
           </svg>
           {camper.engine}
